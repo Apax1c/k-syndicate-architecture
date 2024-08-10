@@ -1,15 +1,15 @@
-﻿using CodeBase.Services.Input;
+﻿using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.States;
 
 namespace CodeBase.Infrastructure
 {
     public class Game
     {
-        public static IInputService InputService;
         public GameStateMachine StateMachine;
 
         public Game(ICoroutineRunner coroutineRunner, Logic.LoadingCurtain curtain)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), curtain);
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), curtain, AllServices.Container);
         }
     }
 }
