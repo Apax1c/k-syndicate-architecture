@@ -1,4 +1,6 @@
-﻿namespace CodeBase.Infrastructure.Services
+﻿using System.ComponentModel.Design;
+
+namespace CodeBase.Infrastructure.Services
 {
     public class AllServices
     {
@@ -8,7 +10,7 @@
         public void RegisterSingle<TService>(TService implementation) where TService : IService => 
             Implementation<TService>.ServiceInstance = implementation;
 
-        public TService Single<TService>() where TService : IService => 
+        public TService Single<TService>() where TService : IService =>
             Implementation<TService>.ServiceInstance;
 
         private static class Implementation<TService> where TService : IService
