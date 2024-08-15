@@ -47,7 +47,7 @@ namespace CodeBase.Infrastructure.States
         private static IInputService InputService()
         {
             if (Application.isEditor)
-                return new StandaloneInputSerice();
+                return new StandaloneInputService();
             else
                 return new MobileInputService();
         }
