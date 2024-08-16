@@ -1,4 +1,4 @@
-﻿using CodeBase.Data;
+using CodeBase.Data;
 using CodeBase.Enemy;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
@@ -12,9 +12,6 @@ namespace CodeBase.Logic
     {
         public MonsterTypeId MonsterTypeId;
         private string _id;
-        
-        private bool _slain;
-        private EnemyDeath _enemyDeath;
         
         private IGameFactory _factory;
 
@@ -49,7 +46,6 @@ namespace CodeBase.Logic
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            if(_slain)
                 progress.KillData.ClearedSpawners.Add(_id);
         }
     }
