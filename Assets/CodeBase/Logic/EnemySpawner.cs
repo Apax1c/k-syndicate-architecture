@@ -12,8 +12,10 @@ namespace CodeBase.Logic
     {
         public MonsterTypeId MonsterTypeId;
         private string _id;
-        
+
+        private bool _slain;
         private IGameFactory _factory;
+        private EnemyDeath _enemyDeath;
 
         private void Awake()
         {
@@ -46,6 +48,7 @@ namespace CodeBase.Logic
 
         public void UpdateProgress(PlayerProgress progress)
         {
+            if(_slain)
                 progress.KillData.ClearedSpawners.Add(_id);
         }
     }
