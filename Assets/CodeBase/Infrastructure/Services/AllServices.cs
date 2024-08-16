@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.Design;
-
-namespace CodeBase.Infrastructure.Services
+﻿namespace CodeBase.Infrastructure.Services
 {
     public class AllServices
     {
-        private static AllServices _instance;
-        public static AllServices Container => _instance ?? (_instance = new AllServices());
+        private static AllServices instance;
+        public static AllServices Container => instance ?? (instance = new AllServices());
 
         public void RegisterSingle<TService>(TService implementation) where TService : IService => 
             Implementation<TService>.ServiceInstance = implementation;
