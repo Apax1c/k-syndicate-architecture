@@ -22,7 +22,7 @@ namespace CodeBase.Infrastructure.States
         {
             LoadProgressOrInitNew();
             
-            _gameStateMachine.Enter<LoadLevelState, string>(_progressService.Progress.WorldData.PositionOnLevel.Level);
+            _gameStateMachine.Enter<LoadSceneState, string>(_progressService.Progress.WorldData.PositionOnLevel.Level);
         }
 
         public void Exit()
@@ -41,8 +41,8 @@ namespace CodeBase.Infrastructure.States
 
             progress.HeroState.MaxHP = 50;
             progress.HeroState.ResetHP();
-            progress.HeroStats.Damage = 1f;
-            progress.HeroStats.DamageRadius = 0.5f;
+            progress.Stats.Damage = 1f;
+            progress.Stats.DamageRadius = 0.5f;
 
             return progress;
         }
