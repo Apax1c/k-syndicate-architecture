@@ -2,7 +2,9 @@
 using CodeBase.Enemy;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.Logic;
+using CodeBase.Logic.EnemySpawners;
 using CodeBase.StaticData;
 using CodeBase.UI;
 using UnityEngine;
@@ -27,35 +29,6 @@ namespace CodeBase.Infrastructure.Factory
             _assets = assets;
             _staticData = staticData;
             _progressService = progressServiceService;
-        }
-
-        public GameObject CreateHero(GameObject at)
-        {
-            HeroGameObject = InstantiateRegistered(AssetPath.HeroPath, at.transform.position);
-            return HeroGameObject;
-        }
-
-        public GameObject CreateHud()
-        {
-            GameObject hud = InstantiateRegistered(AssetPath.HudPath);
-
-            hud.GetComponentInChildren<LootCounter>().Construct(_progressService.Progress.WorldData);
-            
-            return hud;
-        }
-
-        public void CleanUp()
-        {
-            ProgressReaders.Clear();
-            ProgressWriters.Clear();
-        }
-
-        public void Register(ISavedProgressReader progressReader)
-        {
-            if (progressReader is ISavedProgress progressWriter)
-                ProgressWriters.Add(progressWriter);
-
-            ProgressReaders.Add(progressReader);
         }
 
         public GameObject CreateMonster(MonsterTypeId typeId, Transform parent)
@@ -86,6 +59,21 @@ namespace CodeBase.Infrastructure.Factory
             return monster;
         }
 
+        public GameObject CreateHero(GameObject at)
+        {
+            HeroGameObject = InstantiateRegistered(AssetPath.HeroPath, at.transform.position);
+            return HeroGameObject;
+        }
+
+        public GameObject CreateHud()
+        {
+            GameObject hud = InstantiateRegistered(AssetPath.HudPath);
+
+            hud.GetComponentInChildren<LootCounter>().Construct(_progressService.Progress.WorldData);
+            
+            return hud;
+        }
+
         public LootPiece CreateLoot()
         {
             LootPiece lootPiece = InstantiateRegistered(AssetPath.Loot)
@@ -94,6 +82,22 @@ namespace CodeBase.Infrastructure.Factory
             lootPiece.Construct(_progressService.Progress.WorldData);
 
             return lootPiece;
+        }
+
+        public void CreateSpawner(Vector3 at, string spawnerId, MonsterTypeId monsterTypeId)
+        {
+            SpawnPoint spawner = InstantiateRegistered(AssetPath.Spawner, at)
+                .GetComponent<SpawnPoint>();
+
+            spawner.Construct(this);
+            spawner.Id = spawnerId;
+            spawner.MonsterTypeId = monsterTypeId;
+        }
+
+        public void CleanUp()
+        {
+            ProgressReaders.Clear();
+            ProgressWriters.Clear();
         }
 
         private GameObject InstantiateRegistered(string prefabPath, Vector3 at)
@@ -118,6 +122,14 @@ namespace CodeBase.Infrastructure.Factory
             {
                 Register(progressReader);
             }
+        }
+
+        private void Register(ISavedProgressReader progressReader)
+        {
+            if (progressReader is ISavedProgress progressWriter)
+                ProgressWriters.Add(progressWriter);
+
+            ProgressReaders.Add(progressReader);
         }
     }
 }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8616715509131068669
+--- !u!1 &3195504835230064109
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,54 +8,53 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8616715509131068667}
-  - component: {fileID: 8616715509131068666}
-  - component: {fileID: 8780020115513760828}
+  - component: {fileID: 4844948569283094054}
+  - component: {fileID: 3648794187916459127}
+  - component: {fileID: 8351763939118654337}
   m_Layer: 0
-  m_Name: EnemySpawner
-  m_TagString: EnemySpawner
+  m_Name: SpawnMarker
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8616715509131068667
+--- !u!4 &4844948569283094054
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616715509131068669}
-  m_LocalRotation: {x: -0.024680689, y: -0, z: -0, w: 0.99969536}
-  m_LocalPosition: {x: -8.12, y: 0.04, z: -7.36}
+  m_GameObject: {fileID: 3195504835230064109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.809338, y: 1.97, z: -4.2969317}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -2.828, y: 0, z: 0}
---- !u!114 &8616715509131068666
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3648794187916459127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616715509131068669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86f0cd0ad64a4ab1b6bc6ce14f04ed56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MonsterTypeId: 0
-  Slain: 0
---- !u!114 &8780020115513760828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616715509131068669}
+  m_GameObject: {fileID: 3195504835230064109}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de0eeb6636fb4ff4b649a06fb7b9edcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 909651ab-d31c-4c82-8af8-f244d97b4025
+  Id: _921fc53f-8e2a-4823-9e18-a5186bfcf697
+--- !u!114 &8351763939118654337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3195504835230064109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51b5bc14ef64ff7b82b821a996d53dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonsterTypeId: 0
