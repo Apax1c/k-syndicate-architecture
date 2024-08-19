@@ -1,49 +1,58 @@
 ﻿using CodeBase.Data;
 using CodeBase.Infrastructure.Factory;
+using CodeBase.Logic;
+using CodeBase.Services.Randomizer;
 using UnityEngine;
-using Random = System.Random;
 
 namespace CodeBase.Enemy
 {
-    public class LootSpawner : MonoBehaviour
+  public class LootSpawner : MonoBehaviour
+  {
+    public EnemyDeath EnemyDeath;
+    
+    private IGameFactory _factory;
+    private IRandomService _randomizer;
+
+    private int _minValue;
+    private int _maxValue;
+
+    public void Construct(IGameFactory factory, IRandomService randomService)
     {
-        public EnemyDeath EnemyDeath;
-        private IGameFactory _factory;
-        private int _lootMin;
-        private int _lootMax;
-
-        public void Construct(IGameFactory factory)
-        {
-            _factory = factory;
-        }
-        
-        private void Start()
-        {
-            EnemyDeath.Happened += SpawnLoot;
-        }
-
-        private void SpawnLoot()
-        {
-            LootPiece loot = _factory.CreateLoot();
-            loot.transform.position = transform.position;
-            
-            Loot lootItem = LootGenerate();
-            loot.Initialize(lootItem);
-        }
-
-        private Loot LootGenerate()
-        {
-            Random rand = new Random();
-            return new Loot()
-            {
-                Value = rand.Next(_lootMin, _lootMax)
-            };
-        }
-
-        public void SetLoot(int min, int max)
-        {
-            _lootMin = min;
-            _lootMax = max;
-        }
+      _factory = factory;
+      _randomizer = randomService;
     }
+    
+    private void Start()
+    {
+      EnemyDeath.Happened += SpawnLoot;
+    }
+
+    public void SetLootValue(int min, int max)
+    {
+      _minValue = min;
+      _maxValue = max;
+    }
+
+    private void SpawnLoot()
+    {
+      EnemyDeath.Happened -= SpawnLoot;
+
+      LootPiece lootPiece = _factory.CreateLoot();
+      lootPiece.transform.position = transform.position;
+      lootPiece.GetComponent<UniqueId>().GenerateId();
+
+      Loot loot = GenerateLoot();
+      
+      lootPiece.Initialize(loot);
+    }
+
+    private Loot GenerateLoot()
+    {
+      Loot loot = new Loot()
+      {
+        Value = _randomizer.Next(_minValue, _maxValue)
+      };
+      return loot;
+    }
+  }
 }

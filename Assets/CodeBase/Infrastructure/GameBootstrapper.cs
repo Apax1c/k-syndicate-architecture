@@ -4,18 +4,17 @@ using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
-    public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
+  public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
+  {
+    public LoadingCurtain CurtainPrefab;
+    private Game _game;
+
+    private void Awake()
     {
-        public LoadingCurtain CurtainPrefab;
+      _game = new Game(this, Instantiate(CurtainPrefab));
+      _game.StateMachine.Enter<BootstrapState>();
 
-        private Game _game;
-
-        private void Awake()
-        {
-            _game = new Game(this, Instantiate(CurtainPrefab));
-            _game.StateMachine.Enter<BootstrapState>();
-
-            DontDestroyOnLoad(this);
-        }
+      DontDestroyOnLoad(this);
     }
+  }
 }

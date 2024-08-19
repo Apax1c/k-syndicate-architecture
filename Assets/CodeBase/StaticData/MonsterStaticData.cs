@@ -2,29 +2,29 @@
 
 namespace CodeBase.StaticData
 {
-    [CreateAssetMenu(fileName = "MonsterData", menuName = "StaticData/Monster")]
-    public class MonsterStaticData : ScriptableObject
-    {
-        public MonsterTypeId MonsterTypeId;
-        
-        [Range(1, 100)]
-        public int Hp;
-        
-        [Range(1f, 30f)]
-        public float Damage;
+  [CreateAssetMenu(fileName = "MonsterData", menuName = "Static Data/Monster")]
+  public class MonsterStaticData : ScriptableObject
+  {
+    public MonsterTypeId MonsterTypeId;
+    
+    [Range(1,100)]
+    public int Hp = 50;
+    
+    [Range(1,30)]
+    public float Damage = 10;
 
-        public int MaxLoot;
-        public int MinLoot;
-        
-        [Range(1f, 30f)]
-        public float MoveSpeed;
+    public int MaxLootValue = 10;
+    public int MinLootValue = 0;
 
-        [Range(0.5f, 1)]
-        public float EffectiveDistance;
-        
-        [Range(0.5f, 1)]
-        public float Cleavage;
+    [Range(.5f,1)]
+    public float EffectiveDistance = .5f;
+    
+    [Range(.5f,1)]
+    public float Cleavage = .5f;
 
-        public GameObject Prefab;
-    }
+    [Range(0,10)]
+    public float MoveSpeed = 3;
+    
+    public GameObject Prefab;
+  }
 }
