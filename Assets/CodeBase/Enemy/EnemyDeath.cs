@@ -7,6 +7,7 @@ namespace CodeBase.Enemy
   [RequireComponent(typeof(EnemyHealth), typeof(EnemyAnimator))]
   public class EnemyDeath : MonoBehaviour
   {
+    public AgentMoveToPlayer Mover;
     public EnemyHealth Health;
     public EnemyAnimator Animator;
 
@@ -33,7 +34,8 @@ namespace CodeBase.Enemy
     private void Die()
     {
       Health.HealthChanged -= OnHealthChanged;
-      
+
+      Mover.enabled = false;
       Animator.PlayDeath();
       SpawnDeathFx();
 

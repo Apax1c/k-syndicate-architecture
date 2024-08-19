@@ -18,8 +18,6 @@ namespace CodeBase.Infrastructure.States
 {
   public class LoadLevelState : IPayloadedState<string>
   {
-    private const string InitialPointTag = "InitialPoint";
-
     private readonly GameStateMachine _stateMachine;
     private readonly SceneLoader _sceneLoader;
     private readonly LoadingCurtain _loadingCurtain;
@@ -69,18 +67,20 @@ namespace CodeBase.Infrastructure.States
 
     private void InitGameWorld()
     {
-      InitSpawners();
+      var levelData = LevelStaticData();
+      
+      InitSpawners(levelData);
       InitLootPieces();
-      GameObject hero = _gameFactory.CreateHero(GameObject.FindWithTag(InitialPointTag));
+      GameObject hero = InitHero(levelData);
       InitHud(hero);
       CameraFollow(hero);
     }
 
-    private void InitSpawners()
+    private GameObject InitHero(LevelStaticData levelData) => 
+      _gameFactory.CreateHero(levelData.InitialHeroPosition);
+
+    private void InitSpawners(LevelStaticData levelData)
     {
-      string sceneKey = SceneManager.GetActiveScene().name;
-      LevelStaticData levelData = _staticData.ForLevel(sceneKey);
-      
       foreach (EnemySpawnerStaticData spawnerData in levelData.EnemySpawners)
         _gameFactory.CreateSpawner(spawnerData.Id, spawnerData.Position, spawnerData.MonsterTypeId);
     }
@@ -102,6 +102,9 @@ namespace CodeBase.Infrastructure.States
       
       hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
     }
+
+    private LevelStaticData LevelStaticData() => 
+      _staticData.ForLevel(SceneManager.GetActiveScene().name);
 
     private void CameraFollow(GameObject hero) =>
       Camera.main.GetComponent<CameraFollow>().Follow(hero);

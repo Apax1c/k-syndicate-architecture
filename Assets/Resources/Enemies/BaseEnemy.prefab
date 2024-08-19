@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 4970791679775700779}
   - component: {fileID: 1260865992186159246}
   - component: {fileID: 502268589996600908}
-  - component: {fileID: 7466378574836980076}
   m_Layer: 0
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -200,6 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf83ffccec841f8b4c6027b522222dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mover: {fileID: -8268302354631827219}
   Health: {fileID: 4970791679775700779}
   Animator: {fileID: 1759886331324184333}
   DeathFx: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
