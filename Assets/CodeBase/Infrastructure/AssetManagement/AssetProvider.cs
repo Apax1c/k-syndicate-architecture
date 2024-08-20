@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CodeBase.Infrastructure.AssetManagement
 {
@@ -14,6 +15,18 @@ namespace CodeBase.Infrastructure.AssetManagement
     {
       var prefab = Resources.Load<GameObject>(path);
       return Object.Instantiate(prefab);
+    }
+
+    public GameObject Instantiate(string path, Transform under)
+    {
+      var prefab = Resources.Load<GameObject>(path);
+      return Object.Instantiate(prefab, under);
+    }
+
+    public Sprite LoadSprite<T>(string filePath)
+    {
+      Sprite load = Resources.Load<Sprite>(filePath);
+      return load;
     }
   }
 }
